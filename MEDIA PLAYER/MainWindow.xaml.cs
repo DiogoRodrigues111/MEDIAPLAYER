@@ -27,7 +27,6 @@ using System.Threading;
 
 namespace MEDIA_PLAYER
 {
-
     public partial class MainWindow : Window
     {
         private OpenFileDialog _Dlg;
@@ -85,26 +84,8 @@ namespace MEDIA_PLAYER
 
                         playButton_Click(sender, e);
                     }
-
-                    mediaPlayerView.MouseDown += MediaPlayerView_MouseDown;
                     break;
             }
-        }
-
-        private void MediaPlayerView_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            /*
-            if (mediaPlayerView.HasVideo)
-            {
-                if (e.LeftButton == MouseButtonState.Pressed)
-                    if (e.LeftButton == MouseButtonState.Pressed)
-                    {
-                        delay_ms(1000);
-                        fullscreenButton_Click(sender, e);
-                    }
-            }
-            else
-                return; */
         }
 
         public uint delay_ms(long ms)
