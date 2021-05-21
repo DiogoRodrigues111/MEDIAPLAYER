@@ -1,4 +1,13 @@
-﻿using Microsoft.Win32;
+﻿/* *
+ * Abril media player
+ * 
+ * Programmer: Diogo Rodrigues Roessler - SOOAHPAZ ( 5/20/2021 )
+ * 
+ * 
+ * 
+ * */
+
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +24,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Drawing.Drawing2D;
 using System.Windows.Interop;
-//using System.Threading;
 using System.Timers;
 using System.Runtime.InteropServices;
 using System.Globalization;
@@ -37,16 +45,10 @@ namespace MEDIA_PLAYER
 
         private IntPtr handle;
 
-        public int countClick
-        {
-            set;
-            get;
-        }
+        public int countClick { set; get; }
 
         //public System.Threading.ThreadStart threadStart { set; get; }
         public System.Windows.Threading.DispatcherTimer DispacherTime { set; get; }
-
-        public System.Timers.Timer timerCounter { set; get; } = new System.Timers.Timer(1000);
 
         public MainWindow()
         {
@@ -54,9 +56,6 @@ namespace MEDIA_PLAYER
 
             mediaPlayerView.Margin = new Thickness(0D, 22D, 0D, 60D);
             mediaPlayerView.Initialized += MediaPlayerView_Initialized;
-
-            // Dispacher timer
-            //DispacherTime = durationBar.Dispatcher;
         }
 
         private void MediaPlayerView_Initialized(object sender, EventArgs e)
@@ -82,6 +81,7 @@ namespace MEDIA_PLAYER
                         _FileName = _change;
                         mediaPlayerView.Source = new Uri(_FileName);
 
+                        newDurationBar();
                         playButton_Click(sender, e);
                     }
                     break;
@@ -110,8 +110,6 @@ namespace MEDIA_PLAYER
             }
             else
                 _CanLoop = false;
-
-            timerCounter.Stop();
         }
 
         private void playButton_Click(object sender, RoutedEventArgs e)
@@ -158,19 +156,10 @@ namespace MEDIA_PLAYER
 
         private void durationBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            durationBar.Maximum = mediaPlayerView.NaturalDuration.TimeSpan.TotalSeconds;
             mediaPlayerView.Position = TimeSpan.FromSeconds(durationBar.Value);
-            newDurationBar();
-        }
 
-        private void TimerCounter_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            /*
-            timerCounter = sender as Timer;
-
-            timerCounter.Enabled = true;
-            timerCounter.Interval = 1000;
-            timerCounter.Start(); */
+            if (mediaPlayerView.HasVideo || mediaPlayerView.HasAudio)
+                newDurationBar();
         }
 
         private void volumeBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

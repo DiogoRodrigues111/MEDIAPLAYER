@@ -1,4 +1,13 @@
-﻿using System;
+﻿/* *
+ * Abril media player
+ * 
+ * Programmer: Diogo Rodrigues Roessler - SOOAHPAZ ( 5/20/2021 )
+ * 
+ * 
+ * 
+ * */
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;

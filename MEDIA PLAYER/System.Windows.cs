@@ -1,4 +1,13 @@
-﻿
+﻿/* *
+ * Abril media player
+ * 
+ * Programmer: Diogo Rodrigues Roessler - SOOAHPAZ ( 5/20/2021 )
+ * 
+ * 
+ * 
+ * */
+
+
 namespace System.Windows
 {
     [Localizability(LocalizationCategory.None, Readability = Readability.Inherit)]
