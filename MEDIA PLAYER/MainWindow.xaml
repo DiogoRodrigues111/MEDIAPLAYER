@@ -25,23 +25,27 @@
             </MenuItem>
         </Menu>
         <MediaElement Name="mediaPlayerView" AllowDrop="True" LoadedBehavior="Manual" UnloadedBehavior="Manual" Margin="0,24,0,60" PreviewMouseLeftButtonDown="mediaPlayerView_PreviewMouseLeftButtonDown"/>
-        <Button x:Name="playButton" Width="29" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="playButton_Click">
-            <Image x:Name="MyButtonPlay" Source="resource/play.png" Width="20" Height="20"></Image>
-        </Button>
-        <Button x:Name="pauseButton" Width="29" Height="32" Margin="34,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="pauseButton_Click">
-            <Image x:Name="MyButtonPause" Source="resource/pause.png" Width="20" Height="20"></Image>
-        </Button>
-        <Button x:Name="stopButton" Width="29" Height="32" Margin="75,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="stopButton_Click">
-            <Image x:Name="MyButtonStop" Source="resource/stop.png" Width="20" Height="20"></Image>
-        </Button>
-        <CheckBox x:Name="loopButton" Content="loop" Width="59" Height="25" Margin="109,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="loopButton_Click"/>
-        <Button x:Name="fullscreenButton" Width="36" Height="32" Margin="173,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="fullscreenButton_Click">
-            <Image x:Name="MyButtonFullscreen" Source="resource/expand.png" Width="20" Height="20"></Image>
-        </Button>
-        <Button x:Name="muteButton" Height="32" Margin="0,0,124,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="muteButton_Click" Width="31">
-            <Image x:Name="MyButtonMute" Source="resource/mute.png" Width="20" Height="20"></Image>
-        </Button>
-        <Slider x:Name="durationBar" Margin="10,0,10,37" VerticalAlignment="Bottom" Minimum="0" Maximum="100" Value="0" IsMoveToPointEnabled="True" ValueChanged="durationBar_ValueChanged"/>
-        <Slider x:Name="volumeBar" Margin="0,0,10,14" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="94" Minimum="0" Maximum="100" Value="65" ValueChanged="volumeBar_ValueChanged"/>
+        <Canvas x:Name="ControlsPanel" Margin="0,0,770,45" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Button x:Name="playButton" Width="21" Height="23" Click="playButton_Click" Canvas.Left="1" Canvas.Top="4">
+                <Image x:Name="MyButtonPlay" Source="resource/play.png" Width="20" Height="20"/>
+            </Button>
+            <Label x:Name="StartLabel" Content="0:00:00" Canvas.Left="161" Canvas.Top="1"></Label>
+            <Slider x:Name="durationBar" Minimum="0" Maximum="100" Value="0" IsMoveToPointEnabled="True" ValueChanged="durationBar_ValueChanged" Canvas.Left="214" Width="385" Canvas.Top="5"/>
+            <Label x:Name="EndLabel" Content="0:00:00" Canvas.Left="604" Canvas.Top="1"></Label>
+            <Button x:Name="pauseButton" Width="23" Height="22" Click="pauseButton_Click" Canvas.Left="55" Canvas.Top="5">
+                <Image x:Name="MyButtonPause" Source="resource/pause.png" Width="20" Height="19"/>
+            </Button>
+            <Button x:Name="stopButton" Width="23" Height="22" Click="stopButton_Click" VerticalAlignment="Top" Canvas.Left="27" Canvas.Top="5">
+                <Image x:Name="MyButtonStop" Source="resource/stop.png" Width="23" Height="18" VerticalAlignment="Bottom" Margin="0"/>
+            </Button>
+            <ToggleButton x:Name="loopButton" Content="loop" Width="31" Height="22" Click="loopButton_Click" Canvas.Left="83" Canvas.Top="5"/>
+            <Button x:Name="fullscreenButton" Width="23" Height="21" Click="fullscreenButton_Click" Canvas.Left="138" Canvas.Top="5">
+                <Image x:Name="MyButtonFullscreen" Source="resource/expand.png" Width="20" Height="20"/>
+            </Button>
+            <Button x:Name="muteButton" Height="22" Click="muteButton_Click" Width="25" Canvas.Left="663" Canvas.Top="5">
+                <Image x:Name="MyButtonMute" Source="resource/mute.png" Width="20" Height="20"/>
+            </Button>
+            <Slider x:Name="volumeBar" Width="94" Minimum="0" Maximum="100" Value="65" ValueChanged="volumeBar_ValueChanged" Height="20" Canvas.Left="688" Canvas.Top="7"/>
+        </Canvas>
     </Grid>
 </Window>
