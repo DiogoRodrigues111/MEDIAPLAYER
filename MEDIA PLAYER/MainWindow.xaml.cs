@@ -44,7 +44,7 @@ namespace MEDIA_PLAYER
         }
 
         //public System.Threading.ThreadStart threadStart { set; get; }
-        public System.Windows.Threading.Dispatcher DispacherTime { set; get; }
+        public System.Windows.Threading.DispatcherTimer DispacherTime { set; get; }
 
         public System.Timers.Timer timerCounter { set; get; } = new System.Timers.Timer(1000);
 
@@ -56,7 +56,7 @@ namespace MEDIA_PLAYER
             mediaPlayerView.Initialized += MediaPlayerView_Initialized;
 
             // Dispacher timer
-            DispacherTime = durationBar.Dispatcher;
+            //DispacherTime = durationBar.Dispatcher;
         }
 
         private void MediaPlayerView_Initialized(object sender, EventArgs e)
@@ -139,20 +139,28 @@ namespace MEDIA_PLAYER
                 mediaPlayerView.IsMuted = false;
         }
 
-        private Thread newThread()
+        private void newDurationBar()
         {
-            timerCounter.Interval = 1000;
-            durationBar.Value += mediaPlayerView.Position.Seconds / timerCounter.Interval;
-            timerCounter.Start();
+            DispacherTime = new System.Windows.Threading.DispatcherTimer();
+            DispacherTime.Interval = TimeSpan.FromSeconds(1);
+            DispacherTime.Tick += DispacherTime_Tick;
+            DispacherTime.Start();
+        }
 
-            return null;
+        private void DispacherTime_Tick(object sender, EventArgs e)
+        {
+            if (mediaPlayerView.NaturalDuration.HasTimeSpan)
+            {
+                durationBar.Maximum = mediaPlayerView.NaturalDuration.TimeSpan.TotalSeconds;
+                durationBar.Value = mediaPlayerView.Position.TotalSeconds;
+            }
         }
 
         private void durationBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             durationBar.Maximum = mediaPlayerView.NaturalDuration.TimeSpan.TotalSeconds;
             mediaPlayerView.Position = TimeSpan.FromSeconds(durationBar.Value);
-
+            newDurationBar();
         }
 
         private void TimerCounter_Elapsed(object sender, ElapsedEventArgs e)
