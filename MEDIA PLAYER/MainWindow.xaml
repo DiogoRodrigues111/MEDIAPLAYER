@@ -6,9 +6,7 @@
         xmlns:local="clr-namespace:MEDIA_PLAYER"
         mc:Ignorable="d"
         x:Name="MainWindowForm" Title="MainWindow" Height="450" Width="800" KeyDown="OnKeyDown_Form"
-        WindowStartupLocation="CenterScreen"
-        DragEnter="Window_DragEnter" DragLeave="Window_DragLeave" DragOver="Window_DragOver"
-        MouseMove="Window_MouseMove" AllowDrop="True" Drop="Window_Drop">
+        WindowStartupLocation="CenterScreen" AllowDrop="True" Drop="Window_Drop">
 
     <Grid>
         <Menu IsMainMenu="True" Name="m_MainMenu">
@@ -27,7 +25,7 @@
                 <MenuItem Header="About" Name="mi_About" Click="mi_About_Click"/>
             </MenuItem>
         </Menu>
-        <MediaElement Name="mediaPlayerView" AllowDrop="True" LoadedBehavior="Manual" UnloadedBehavior="Manual" Margin="0,24,0,60" DragEnter="Window_DragEnter" DragLeave="Window_DragLeave" DragOver="Window_DragOver" MouseMove="Window_MouseMove" PreviewMouseLeftButtonDown="mediaPlayerView_PreviewMouseLeftButtonDown"/>
+        <MediaElement Name="mediaPlayerView" AllowDrop="True" LoadedBehavior="Manual" UnloadedBehavior="Manual" Margin="0,24,0,60" Drop="Window_Drop" PreviewMouseLeftButtonDown="mediaPlayerView_PreviewMouseLeftButtonDown"/>
         <Canvas x:Name="ControlsPanel" Margin="0,0,770,45" VerticalAlignment="Bottom" HorizontalAlignment="Center">
             <Button x:Name="playButton" Width="21" Height="23" Click="playButton_Click" Canvas.Left="1" Canvas.Top="4">
                 <Image x:Name="MyButtonPlay" Source="resource/play.png" Width="20" Height="20"/>

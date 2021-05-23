@@ -620,45 +620,32 @@ namespace MEDIA_PLAYER
             }
         }
 
-        private void Window_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop, true))
-            {
-                string DataString = (string)e.Data.GetData(DataFormats.StringFormat, true);
-                e.Effects = DragDropEffects.Copy;
-            }
-        }
-
-        private void Window_DragLeave(object sender, DragEventArgs e)
-        {
-            return;
-        }
-
-        private void Window_DragOver(object sender, DragEventArgs e)
-        {
-            e.Effects = DragDropEffects.None;
-
-            if (e.Data.GetDataPresent(DataFormats.FileDrop, true))
-            {
-                string[] DataString = (string[])e.Data.GetData(DataFormats.StringFormat, true);
-            }
-        }
-
-        private void Window_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Handled)
-            {
-                if (DragDrop.DoDragDrop(this, DataFormats.FileDrop, DragDropEffects.Copy | DragDropEffects.Move) == DragDropEffects.Copy)
-                    mediaPlayerView.Play();
-            }
-        }
-
         private void Window_Drop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop, true))
+#if DEBUG
+            try
             {
-                string[] DataString = (string[])e.Data.GetData(DataFormats.StringFormat, false);
+                if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                {
+                    string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+                    mediaPlayerView.Source = new Uri(files[0]);
+                    mediaPlayerView.Play();
+                }
             }
+            catch (COMException comEx)
+            {
+                MessageBox.Show(comEx.Message);
+            }
+#else
+                if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                {
+                    string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+                    mediaPlayerView.Source = new Uri(files[0]);
+                    mediaPlayerView.Play();
+                }
+#endif
         }
     }
 }
