@@ -631,6 +631,7 @@ namespace MEDIA_PLAYER
 
                     mediaPlayerView.Source = new Uri(files[0]);
                     mediaPlayerView.Play();
+                    newDurationBar();
                 }
             }
             catch (COMException comEx)
