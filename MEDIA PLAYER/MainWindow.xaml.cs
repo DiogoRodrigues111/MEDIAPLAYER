@@ -91,8 +91,8 @@ namespace MEDIA_PLAYER
 
         public uint delay_ms(long ms)
         {
-            for (uint j = 0; j < 65000; j++)
-                for (uint l = 0; l < ms; l++)
+            for (uint j = 0; j < 65000 / 1000; j++)
+                for (uint l = 0; l < ms % 60; l++)
                     ;
 
             return (uint)ms;
@@ -152,6 +152,12 @@ namespace MEDIA_PLAYER
             {
                 durationBar.Maximum = mediaPlayerView.NaturalDuration.TimeSpan.TotalSeconds;
                 durationBar.Value = mediaPlayerView.Position.TotalSeconds;
+
+                //int s = 1000;
+                //int m = s / 60;
+                //int h = s + m % 60;
+
+                StartLabel.Content = String.Format("{0:2D}:{1:2D}:{2:2D}", (int)mediaPlayerView.Position.Hours % 60, (int)mediaPlayerView.Position.Minutes % 60, (int)mediaPlayerView.Position.Seconds % 60);
             }
         }
 
