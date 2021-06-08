@@ -41,10 +41,18 @@ namespace MEDIA_PLAYER
 			get { return GetSystemMetrics(SM_CYSCREEN); }
 		}
 
+		public static void SetCustomWinFullScreen(IntPtr hWnd, int width, int height)
+        {
+
+            SetWindowPos(hWnd, HWND_TOP, -7, -7, width, height, SWP_SHOWWINDOW);
+		}
+
+		/*
 		public static void SetWinFullScreen(IntPtr hWnd)
 		{
-			SetWindowPos(hWnd, HWND_TOP, -7, -7, ScreenX *2, ScreenY *2, SWP_SHOWWINDOW);
-		}
+			//SetWindowPos(hWnd, HWND_TOP, -7, -7, ScreenX *2, ScreenY *2, SWP_SHOWWINDOW);
+			SetWindowPos(hWnd, HWND_TOP, -7, -7, ScreenX * 2, ScreenY * 2, SWP_SHOWWINDOW);
+		} */
 
 		public class WindowFullscreenTaskbar
 		{

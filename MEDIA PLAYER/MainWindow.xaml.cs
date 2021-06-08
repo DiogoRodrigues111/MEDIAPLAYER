@@ -153,11 +153,7 @@ namespace MEDIA_PLAYER
                 durationBar.Maximum = mediaPlayerView.NaturalDuration.TimeSpan.TotalSeconds;
                 durationBar.Value = mediaPlayerView.Position.TotalSeconds;
 
-                //int s = 1000;
-                //int m = s / 60;
-                //int h = s + m % 60;
-
-                StartLabel.Content = String.Format("{0:2D}:{1:2D}:{2:2D}", (int)mediaPlayerView.Position.Hours % 60, (int)mediaPlayerView.Position.Minutes % 60, (int)mediaPlayerView.Position.Seconds % 60);
+                StartLabel.Content = String.Format("{0:d}:{1:d}:{2:d}", (int)mediaPlayerView.Position.Hours % 60, (int)mediaPlayerView.Position.Minutes % 60, (int)mediaPlayerView.Position.Seconds % 60);
             }
         }
 
@@ -235,22 +231,24 @@ namespace MEDIA_PLAYER
 
                 Taskbar.WindowFullscreenTaskbar.IsMaximize = true;
 
-                mediaPlayerView.Stretch = Stretch.Fill;
                 mediaPlayerView.Margin = new Thickness(0D, 0D, 0D, 0D);
 
-                if (Taskbar.WindowFullscreenTaskbar.IsMaximize == true)
+                if (mediaPlayerView.HasVideo)
                 {
-                    handle = new WindowInteropHelper(this).Handle;
-                    Taskbar.SetWinFullScreen(handle);
+                    if (Taskbar.WindowFullscreenTaskbar.IsMaximize)
+                    {
+                        mediaPlayerView.Stretch = Stretch.Uniform;
+                        handle = new WindowInteropHelper(this).Handle;
+
+                        Taskbar.SetCustomWinFullScreen(
+                            handle, 
+                            mediaPlayerView.NaturalVideoWidth, 
+                            mediaPlayerView.NaturalVideoHeight
+                        );
+                    }
                 }
-                else
-                    return;
 
                 this.Topmost = true;
-            }
-            else
-            {
-                return;
             }
         }
 
@@ -532,10 +530,13 @@ namespace MEDIA_PLAYER
                         if (Taskbar.WindowFullscreenTaskbar.IsMaximize == true)
                         {
                             handle = new WindowInteropHelper(this).Handle;
-                            Taskbar.SetWinFullScreen(handle);
+
+                            Taskbar.SetCustomWinFullScreen(
+                                handle,
+                                mediaPlayerView.NaturalVideoWidth,
+                                mediaPlayerView.NaturalVideoHeight
+                            );
                         }
-                        else
-                            return;
 
                         this.Topmost = true;
                     }
@@ -548,7 +549,11 @@ namespace MEDIA_PLAYER
                         if (Taskbar.WindowFullscreenTaskbar.IsMaximize == false)
                         {
                             handle = new WindowInteropHelper(this).Handle;
-                            Taskbar.SetWinFullScreen(handle);
+                            Taskbar.SetCustomWinFullScreen(
+                                handle,
+                                mediaPlayerView.NaturalVideoWidth,
+                                mediaPlayerView.NaturalVideoHeight
+                            );
                         }
                     }
 
@@ -612,7 +617,11 @@ namespace MEDIA_PLAYER
                         if (Taskbar.WindowFullscreenTaskbar.IsMaximize == false)
                         {
                             handle = new WindowInteropHelper(this).Handle;
-                            Taskbar.SetWinFullScreen(handle);
+                            Taskbar.SetCustomWinFullScreen(
+                                handle,
+                                mediaPlayerView.NaturalVideoWidth,
+                                mediaPlayerView.NaturalVideoHeight
+                            );
                         }
 
                         this.WindowState = WindowState.Normal;
