@@ -47,12 +47,11 @@ namespace MEDIA_PLAYER
             SetWindowPos(hWnd, HWND_TOP, -7, -7, width, height, SWP_SHOWWINDOW);
 		}
 
-		/*
+		
 		public static void SetWinFullScreen(IntPtr hWnd)
 		{
-			//SetWindowPos(hWnd, HWND_TOP, -7, -7, ScreenX *2, ScreenY *2, SWP_SHOWWINDOW);
-			SetWindowPos(hWnd, HWND_TOP, -7, -7, ScreenX * 2, ScreenY * 2, SWP_SHOWWINDOW);
-		} */
+			SetWindowPos(hWnd, HWND_TOP, -7, -8, ScreenX * 2, ScreenY * 2, SWP_SHOWWINDOW);
+		}
 
 		public class WindowFullscreenTaskbar
 		{

@@ -56,12 +56,6 @@ namespace MEDIA_PLAYER
             InitializeComponent();
 
             mediaPlayerView.Margin = new Thickness(0D, 22D, 0D, 60D);
-            mediaPlayerView.Initialized += MediaPlayerView_Initialized;
-        }
-
-        private void MediaPlayerView_Initialized(object sender, EventArgs e)
-        {
-            return;
         }
 
         private void mi_Open_Click(object sender, RoutedEventArgs e)
@@ -146,6 +140,14 @@ namespace MEDIA_PLAYER
             DispacherTime.Start();
         }
 
+        private void CounterEndLabel()
+        {
+            if (mediaPlayerView.NaturalDuration.HasTimeSpan)
+            {
+                EndLabel.Content = mediaPlayerView.NaturalDuration.TimeSpan.Duration();
+            }
+        }
+
         private void DispacherTime_Tick(object sender, EventArgs e)
         {
             if (mediaPlayerView.NaturalDuration.HasTimeSpan)
@@ -162,7 +164,10 @@ namespace MEDIA_PLAYER
             mediaPlayerView.Position = TimeSpan.FromSeconds(durationBar.Value);
 
             if (mediaPlayerView.HasVideo || mediaPlayerView.HasAudio)
+            {
                 newDurationBar();
+                CounterEndLabel();
+            }
         }
 
         private void volumeBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -237,14 +242,10 @@ namespace MEDIA_PLAYER
                 {
                     if (Taskbar.WindowFullscreenTaskbar.IsMaximize)
                     {
-                        mediaPlayerView.Stretch = Stretch.Uniform;
                         handle = new WindowInteropHelper(this).Handle;
 
-                        Taskbar.SetCustomWinFullScreen(
-                            handle, 
-                            mediaPlayerView.NaturalVideoWidth, 
-                            mediaPlayerView.NaturalVideoHeight
-                        );
+                        Taskbar.SetWinFullScreen(handle);
+                        mediaPlayerView.Stretch = Stretch.Uniform;
                     }
                 }
 
@@ -531,11 +532,8 @@ namespace MEDIA_PLAYER
                         {
                             handle = new WindowInteropHelper(this).Handle;
 
-                            Taskbar.SetCustomWinFullScreen(
-                                handle,
-                                mediaPlayerView.NaturalVideoWidth,
-                                mediaPlayerView.NaturalVideoHeight
-                            );
+                            Taskbar.SetWinFullScreen(handle);
+                            mediaPlayerView.Stretch = Stretch.Uniform;
                         }
 
                         this.Topmost = true;
