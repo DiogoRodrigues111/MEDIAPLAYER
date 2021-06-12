@@ -3,52 +3,35 @@
  * 
  * Programmer: Diogo Rodrigues Roessler - SOOAHPAZ ( 5/20/2021 )
  * 
- * 
- * 
+ * Create version 1.0 now DataTime: 12:06:2021 - By Diogo Rodrigues Roessler
  * */
 
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Drawing.Drawing2D;
 using System.Windows.Interop;
-using System.Timers;
 using System.Runtime.InteropServices;
-using System.Globalization;
-using System.Windows.Markup;
-using System.Collections;
-using System.Windows.Automation.Peers;
-using System.ComponentModel;
-using System.Threading;
-using System.IO;
 
 namespace MEDIA_PLAYER
 {
     public partial class MainWindow : Window
     {
+        // That's all necessary globals
         private OpenFileDialog _Dlg;
         private volatile string _FileName;
         private bool? _ResultDlg;
         private bool _CanLoop = false;
         private volatile bool _CanFlip = false;
 
+        // handle: Necessary handle global variable for access fullscreen but not create new instance
         private IntPtr handle;
 
+        // countClick: Is counter click pressed
         public int countClick { set; get; }
 
-        //public System.Threading.ThreadStart threadStart { set; get; }
+        // DispacherTime: Create dispacher from timer
         public System.Windows.Threading.DispatcherTimer DispacherTime { set; get; }
 
         public MainWindow()
