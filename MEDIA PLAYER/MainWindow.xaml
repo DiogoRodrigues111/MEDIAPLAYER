@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MEDIA_PLAYER"
         mc:Ignorable="d"
         x:Name="MainWindowForm" Title="MainWindow" Height="450" Width="800" KeyDown="OnKeyDown_Form"
-        WindowStartupLocation="CenterScreen" AllowDrop="True" Drop="Window_Drop">
+        WindowStartupLocation="CenterScreen" AllowDrop="True" Drop="Window_Drop" OpacityMask="Black" Background="Black">
 
     <Grid>
         <Menu IsMainMenu="True" Name="m_MainMenu">
@@ -26,27 +26,27 @@
             </MenuItem>
         </Menu>
         <MediaElement Name="mediaPlayerView" AllowDrop="True" LoadedBehavior="Manual" UnloadedBehavior="Manual" Margin="0,24,0,60" Drop="Window_Drop" PreviewMouseLeftButtonDown="mediaPlayerView_PreviewMouseLeftButtonDown"/>
-        <Canvas x:Name="ControlsPanel" Margin="0,0,770,45" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+        <WrapPanel x:Name="ControlsPanel" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="792" Height="55">
             <Button x:Name="playButton" Width="21" Height="23" Click="playButton_Click" Canvas.Left="1" Canvas.Top="4">
                 <Image x:Name="MyButtonPlay" Source="resource/play.png" Width="20" Height="20"/>
             </Button>
-            <Label x:Name="StartLabel" Content="0:00:00" Canvas.Left="161" Canvas.Top="1"></Label>
-            <Slider x:Name="durationBar" Minimum="0" Maximum="100" Value="0" IsMoveToPointEnabled="True" ValueChanged="durationBar_ValueChanged" Canvas.Left="214" Width="385" Canvas.Top="5"/>
-            <Label x:Name="EndLabel" Content="0:00:00" Canvas.Left="604" Canvas.Top="1"></Label>
             <Button x:Name="pauseButton" Width="23" Height="22" Click="pauseButton_Click" Canvas.Left="55" Canvas.Top="5">
                 <Image x:Name="MyButtonPause" Source="resource/pause.png" Width="20" Height="19"/>
             </Button>
-            <Button x:Name="stopButton" Width="23" Height="22" Click="stopButton_Click" VerticalAlignment="Top" Canvas.Left="27" Canvas.Top="5">
+            <Button x:Name="stopButton" Width="23" Height="24" Click="stopButton_Click" VerticalAlignment="Top">
                 <Image x:Name="MyButtonStop" Source="resource/stop.png" Width="23" Height="18" VerticalAlignment="Bottom" Margin="0"/>
             </Button>
             <ToggleButton x:Name="loopButton" Content="loop" Width="31" Height="22" Click="loopButton_Click" Canvas.Left="83" Canvas.Top="5"/>
             <Button x:Name="fullscreenButton" Width="23" Height="21" Click="fullscreenButton_Click" Canvas.Left="138" Canvas.Top="5">
                 <Image x:Name="MyButtonFullscreen" Source="resource/expand.png" Width="20" Height="20"/>
             </Button>
+            <Label x:Name="StartLabel" Content="0:00:00" Canvas.Left="161" Canvas.Top="1"></Label>
+            <Slider x:Name="durationBar" Minimum="0" Maximum="100" Value="0" IsMoveToPointEnabled="True" ValueChanged="durationBar_ValueChanged" Canvas.Left="214" Width="385" Canvas.Top="5"/>
+            <Label x:Name="EndLabel" Content="0:00:00" Canvas.Left="604" Canvas.Top="1"></Label>
             <Button x:Name="muteButton" Height="22" Click="muteButton_Click" Width="25" Canvas.Left="663" Canvas.Top="5">
                 <Image x:Name="MyButtonMute" Source="resource/mute.png" Width="20" Height="20"/>
             </Button>
             <Slider x:Name="volumeBar" Width="94" Minimum="0" Maximum="100" Value="65" ValueChanged="volumeBar_ValueChanged" Height="20" Canvas.Left="688" Canvas.Top="7"/>
-        </Canvas>
+        </WrapPanel>
     </Grid>
 </Window>

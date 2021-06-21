@@ -34,11 +34,15 @@ namespace MEDIA_PLAYER
         // DispacherTime: Create dispacher from timer
         public System.Windows.Threading.DispatcherTimer DispacherTime { set; get; }
 
+        public PlaylistPage Playlist;
+
         public MainWindow()
         {
             InitializeComponent();
 
             mediaPlayerView.Margin = new Thickness(0D, 22D, 0D, 60D);
+
+            Playlist = new PlaylistPage();
         }
 
         private void mi_Open_Click(object sender, RoutedEventArgs e)
@@ -217,6 +221,16 @@ namespace MEDIA_PLAYER
                     volumeBar.Visibility = Visibility.Hidden;
                 }
 
+                if (StartLabel.IsVisible == true)
+                {
+                    StartLabel.Visibility = Visibility.Hidden;
+                }
+
+                if (EndLabel.IsVisible == true)
+                {
+                    EndLabel.Visibility = Visibility.Hidden;
+                }
+
                 Taskbar.WindowFullscreenTaskbar.IsMaximize = true;
 
                 mediaPlayerView.Margin = new Thickness(0D, 0D, 0D, 0D);
@@ -233,6 +247,9 @@ namespace MEDIA_PLAYER
                 }
 
                 this.Topmost = true;
+
+                Cursor = Cursors.None;
+                MouseMove += MainWindow_MouseMove;
             }
         }
 
@@ -292,6 +309,16 @@ namespace MEDIA_PLAYER
                         volumeBar.Visibility = Visibility.Visible;
                     }
 
+                    if (StartLabel.IsVisible == false)
+                    {
+                        StartLabel.Visibility = Visibility.Visible;
+                    }
+
+                    if (EndLabel.IsVisible == false)
+                    {
+                        EndLabel.Visibility = Visibility.Visible;
+                    }
+
                     Taskbar.WindowFullscreenTaskbar.IsMaximize = false;
 
                     mediaPlayerView.Stretch = Stretch.Uniform;
@@ -302,6 +329,8 @@ namespace MEDIA_PLAYER
                     this.Height = 450;
                     this.Topmost = true;
                 }
+
+                Cursor = Cursors.Arrow;
             }
             else
             {
@@ -389,7 +418,7 @@ namespace MEDIA_PLAYER
 
         private void mi_Playlist_Click(object sender, RoutedEventArgs e)
         {
-
+            Playlist.Visibility = Visibility.Visible;
         }
 
         private void mi_About_Click(object sender, RoutedEventArgs e)
@@ -506,6 +535,16 @@ namespace MEDIA_PLAYER
                             volumeBar.Visibility = Visibility.Hidden;
                         }
 
+                        if (StartLabel.IsVisible == true)
+                        {
+                            StartLabel.Visibility = Visibility.Hidden;
+                        }
+
+                        if (EndLabel.IsVisible == true)
+                        {
+                            EndLabel.Visibility = Visibility.Hidden;
+                        }
+
                         Taskbar.WindowFullscreenTaskbar.IsMaximize = true;
 
                         mediaPlayerView.Stretch = Stretch.Fill;
@@ -590,6 +629,16 @@ namespace MEDIA_PLAYER
                             volumeBar.Visibility = Visibility.Visible;
                         }
 
+                        if (StartLabel.IsVisible == false)
+                        {
+                            StartLabel.Visibility = Visibility.Visible;
+                        }
+
+                        if (EndLabel.IsVisible == false)
+                        {
+                            EndLabel.Visibility = Visibility.Visible;
+                        }
+
                         Taskbar.WindowFullscreenTaskbar.IsMaximize = false;
 
                         mediaPlayerView.Stretch = Stretch.Uniform;
@@ -612,6 +661,25 @@ namespace MEDIA_PLAYER
                     }
 
                     counter = 0;
+                }
+
+                Cursor = Cursors.None;
+                MouseMove += MainWindow_MouseMove;
+            }
+        }
+
+        private void MainWindow_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mediaPlayerView.HasVideo)
+            {
+                if (Cursor == Cursors.None)
+                {
+                    Cursor = Cursors.Arrow;
+
+                    if (ControlsPanel.IsVisible == true)
+                    {
+                        ControlsPanel.Visibility = Visibility.Visible;
+                    }
                 }
             }
         }

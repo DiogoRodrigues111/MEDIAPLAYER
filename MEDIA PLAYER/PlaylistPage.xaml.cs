@@ -24,11 +24,10 @@ using System.Windows.Shapes;
 
 namespace MEDIA_PLAYER
 {
-	/// <summary>
-	/// Interaction logic for PlaylistPage.xaml
-	/// </summary>
 	public partial class PlaylistPage : Page
 	{
+		public static PlaylistPage m_Playlist;
+
 		public PlaylistPage()
 		{
 			InitializeComponent();

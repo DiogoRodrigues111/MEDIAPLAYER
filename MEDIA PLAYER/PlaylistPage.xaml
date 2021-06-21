@@ -9,8 +9,8 @@
       Title="PlaylistPage">
 
     <Grid>
-        <ListBox x:Name="pagePlaylist">
+        <ListView x:Name="pagePlaylist">
             
-        </ListBox>
+        </ListView>
     </Grid>
 </Page>
