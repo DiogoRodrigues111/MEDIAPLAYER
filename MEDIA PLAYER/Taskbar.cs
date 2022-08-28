@@ -8,10 +8,6 @@
  * */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
 namespace MEDIA_PLAYER
@@ -42,12 +38,12 @@ namespace MEDIA_PLAYER
 		}
 
 		public static void SetCustomWinFullScreen(IntPtr hWnd, int width, int height)
-        {
+		{
 
-            SetWindowPos(hWnd, HWND_TOP, -7, -7, width, height, SWP_SHOWWINDOW);
+			SetWindowPos(hWnd, HWND_TOP, -7, -7, width, height, SWP_SHOWWINDOW);
 		}
 
-		
+
 		public static void SetWinFullScreen(IntPtr hWnd)
 		{
 			SetWindowPos(hWnd, HWND_TOP, -7, -8, ScreenX * 2, ScreenY * 2, SWP_SHOWWINDOW);

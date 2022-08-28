@@ -16,17 +16,17 @@ using System.Threading.Tasks;
 
 namespace MEDIA_PLAYER
 {
-    public static class FILE_LINE
-    {
+	public static class FILE_LINE
+	{
 #if DEBUG
-        public static String __GET_LINE__
-        {
-            get
-            {
-                StackFrame f = new StackFrame(1, true);
-                return "FILE: " + f.GetFileName() + " \n " + "LINE: " + f.GetFileLineNumber() + " \n " + "COLUMS: " + f.GetFileColumnNumber() + " \n " + "ROUTINE: " + f.GetMethod();
-            }
-        }
+		public static String __GET_LINE__
+		{
+			get
+			{
+				StackFrame f = new StackFrame(1, true);
+				return "FILE: " + f.GetFileName() + " \n " + "LINE: " + f.GetFileLineNumber() + " \n " + "COLUMS: " + f.GetFileColumnNumber() + " \n " + "ROUTINE: " + f.GetMethod();
+			}
+		}
 #endif
-    }
+	}
 }

@@ -19,6 +19,10 @@
                 <MenuItem Header="Flip View Bottom" Name="mi_FlipViewBottom" IsCheckable="True" Click="mi_FlipViewBottom_Click"/>
                 <MenuItem Header="Flip View Right" Name="mi_FlipViewRight" IsCheckable="True" Click="mi_FlipViewRight_Click"/>
                 <MenuItem Header="Flip View Left" Name="mi_FlipViewLeft" IsCheckable="True" Click="mi_FlipViewLeft_Click"/>
+                <MenuItem Header="Zoom In" Name="mi_ZoomIn" IsCheckable="False" Click="mi_ZoomIn_Click"/>
+                <MenuItem Header="Zoom Out" Name="mi_ZoomOut" IsCheckable="False" Click="mi_ZoomOut_Click"/>
+                <MenuItem Header="Move Down" Name="mi_MoveDown" IsCheckable="False" Click="mi_MoveDown_Click"/>
+                <MenuItem Header="Move Up" Name="mi_MoveUp" IsCheckable="False" Click="mi_MoveUp_Click"/>
                 <MenuItem Header="Playlist" Name="mi_Playlist" IsCheckable="True" Click="mi_Playlist_Click"/>
             </MenuItem>
             <MenuItem x:Name="m_MainMenu_About" Header="About">
