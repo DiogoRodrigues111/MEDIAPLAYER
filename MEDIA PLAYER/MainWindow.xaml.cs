@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Interop;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace MEDIA_PLAYER
 {
@@ -70,13 +71,11 @@ namespace MEDIA_PLAYER
 			}
 		}
 
-		public uint delay_ms(long ms)
+		public void delay_ms(long ms)
 		{
-			for (uint j = 0; j < 65000 / 1000; j++)
+			for (uint j = 0; j < 3600000 / ms; j++)
 				for (uint l = 0; l < ms % 60; l++)
 					;
-
-			return (uint)ms;
 		}
 
 		private void MediaPlayerView_MediaEnded(object sender, RoutedEventArgs e)
@@ -347,6 +346,18 @@ namespace MEDIA_PLAYER
 
 					countClick = 0;
 				}
+
+				if (e.Key == Key.E)
+				{
+					if (mediaPlayerView.HasVideo)
+					{
+						mediaPlayerView.StretchDirection = System.Windows.Controls.StretchDirection.Both;
+					}
+#if DEBUG
+					Debug.WriteLine("Key: <E>, is pressed.");
+#endif
+				}
+
 				return;
 			}
 		}
@@ -715,7 +726,7 @@ namespace MEDIA_PLAYER
 
 		private void mi_ZoomIn_Click(object sender, RoutedEventArgs e)
 		{
-
+			this.KeyDown += OnKeyDown_Form;
 		}
 
 		private void mi_ZoomOut_Click(object sender, RoutedEventArgs e)
